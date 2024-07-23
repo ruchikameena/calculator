@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" name="display" placeholder="0"> 
+        <div class="past"></div>
+        <div class="buttons">
+            <button class="btn gray">C</button>
+            <button class="btn gray" id="sqr">x^2</button>
+            <button class="btn gray">%</button>
+            <button class="btn red">/</button>
+        </div>
+        <div class="buttons">
+            <button class="btn dark">7</button>
+            <button class="btn dark">8</button>
+            <button class="btn dark">9</button>
+            <button class="btn red">*</button>
+        </div>
+        <div class="buttons">
+            
+            <button class="btn dark">4</button>
+            <button class="btn dark">5</button>
+            <button class="btn dark">6</button>
+            <button class="btn red">-</button>
+        </div>
+        <div class="buttons">
+            
+            <button class="btn dark">1</button>
+            <button class="btn dark">2</button>
+            <button class="btn dark">3</button>
+            <button class="btn red">+</button>
+        </div>
+        <div class="buttons">
+            <button class="btn dark del" >del</button>
+            <button class="btn dark zero">0</button>
+            <button class="btn dark">.</button>
+            <button class="btn red eql">=</button>
+        </div>
+    </div>
+    <script>
+        let btn = document.querySelectorAll('button');
+        for (let i of btn){
+            if(i.innerText == '='){
+                i.onclick = function(){
+                    let exp = document.querySelector("input").value;
+                    if(exp != ''){
+                        console.log(eval(exp));
+                    document.querySelector(".past").innerText ="result : " + eval(exp);
+                    }
+                    else{
+                        document.querySelector(".past").innerText ="result : " + 0;
+                    }
+                }
+            }
+            else if(i.innerText == 'C'){
+                i.onclick = function(){
+                    document.querySelector("input").value = '';
+                }
+            }
+            else if(i.innerText == 'del'){
+                i.onclick = function(){
+                    let val= document.querySelector("input").value;
+                    let size = val.length;
+                    let newnum = "";
+                    for(let i=0;i<size-1;i++){
+                        newnum += val[i];
+                    }
+                    document.querySelector("input").value = newnum;
+                }
+            }
+            else if(i.innerText == 'x^2'){
+                i.onclick = function(){
+                    let val = document.querySelector('input').value;
+                    document.querySelector(".past").innerText ="result : " + val**2;
+                }
+            }
+            else{ 
+                i.onclick = function(){
+                    let val = document.querySelector("input").value +=i.innerText;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
